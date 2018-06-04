@@ -1,1 +1,1 @@
-__all__==["mtgecho","ebay"]
+__all__==["mtgecho","ebay","findall"]

@@ -35,9 +35,9 @@ def callWatchlist():
 def prettyWatchlist():
     rawData = callWatchlist()
     watchList = PrettyTable()
-    watchList.field_names = ["name", "set_code", "tcg_low", "tcg_mid", "foil_price"]
+    watchList.field_names = ["name", "set", "tcg_low", "tcg_mid", "foil_price"]
     for i in rawData:
-        watchList.add_row([i["name"], i["set_code"], i["tcg_low"], i["tcg_mid"], i["foil_price"]])
+        watchList.add_row([i["name"], i["set"], i["tcg_low"], i["tcg_mid"], i["foil_price"]])
     watchList.align["name"] = "l"
     watchList.align["foil_price"] = "r"
     print watchList.get_string(sortby="foil_price")
