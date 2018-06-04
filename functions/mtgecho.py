@@ -12,18 +12,31 @@ def authGen():
     result = json.loads(instantiate.text)
     return result["token"]
 
-def callWatchlist(start, end):
-    token = authGen()
-    watchUrl = "https://www.echomtg.com/api/watchlist/view/start="+str(start)+"&limit="+str(end)+"&auth="+token
-    instantiate = requests.get(watchUrl)
-    result = json.loads(instantiate.text)
-    return result
+def callWatchlist():
+    start = 0
+    end = 100
+    inc = 100
+    contents = []
+    cont = True
+    while cont:
+        token = authGen()
+        watchUrl = "https://www.echomtg.com/api/watchlist/view/start="+str(start)+"&limit="+str(end)+"&auth="+token
+        instantiate = requests.get(watchUrl)
+        result = json.loads(instantiate.text)
+        for i in result["items"]:
+            contents.append(i)
+        if len(contents) == end:
+            start = end+1
+            end = end+inc
+        else:
+            cont = False
+    return contents
 
-def prettyWatchlist(start, end):
-    rawData = callWatchlist(0,100)
+def prettyWatchlist():
+    rawData = callWatchlist()
     watchList = PrettyTable()
     watchList.field_names = ["name", "set_code", "tcg_low", "tcg_mid", "foil_price"]
-    for i in rawData["items"]:
+    for i in rawData:
         watchList.add_row([i["name"], i["set_code"], i["tcg_low"], i["tcg_mid"], i["foil_price"]])
     watchList.align["name"] = "l"
     watchList.align["foil_price"] = "r"
@@ -31,7 +44,7 @@ def prettyWatchlist(start, end):
         
 
 def main():
-    prettyWatchlist(0,100)
+    prettyWatchlist()
 
 if __name__ == "__main__":
     main()
