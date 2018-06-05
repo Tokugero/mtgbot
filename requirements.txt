@@ -1,0 +1,8 @@
+certifi==2018.4.16
+chardet==3.0.4
+idna==2.6
+isodate==0.6.0
+prettytable==0.7.2
+requests==2.18.4
+six==1.11.0
+urllib3==1.22
