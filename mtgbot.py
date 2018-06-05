@@ -1,4 +1,5 @@
-#! bin/python
+#!/usr/bin/env python
+
 from functions import *
 
 def main():
