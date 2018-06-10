@@ -2,6 +2,7 @@
 
 from functions import *
 
+#Most of the logic is hidden in ./functions/*.py to keep this pretty.
 def main():
     findall.cliOutput()
 
